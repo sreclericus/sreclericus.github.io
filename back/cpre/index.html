@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  <script
+  src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"
+  integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk="
+  crossorigin="anonymous">
+  </script>
+  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+  
+  <script>
+    $( function() {
+    var availableTags = [
+      "ZAGALSKY",
+      "BERMAN",
+      "CANIGGIA",
+      "CORDERO",
+      "VISCARDI",
+      "GIAVEDONI",
+      "OCAMPO",
+      "SANCHEZ",
+      "NAZAR",
+      "FANJUL",
+      "PAGANINI"
+    ];
+    function split( val ) {
+      return val.split( /,\s*/ );
+    }
+    function extractLast( term ) {
+      return split( term ).pop();
+    }
+    $( "#Operador" )
+      // don't navigate away from the field on tab when selecting an item
+      .on( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).autocomplete( "instance" ).menu.active ) {
+          event.preventDefault();
+        }
+      })
+      .autocomplete({
+        minLength: 0,
+        source: function( request, response ) {
+          // delegate back to autocomplete, but extract the last term
+          response( $.ui.autocomplete.filter(
+            availableTags, extractLast( request.term ) ) );
+        },
+        focus: function() {
+          // prevent value inserted on focus
+          return false;
+        },
+        select: function( event, ui ) {
+          var terms = split( this.value );
+          // remove the current input
+          terms.pop();
+          // add the selected item
+          terms.push( ui.item.value );
+          // add placeholder to get the comma-and-space at the end
+          terms.push( "" );
+          this.value = terms.join( ", " );
+          return false;
+        }
+      });
+  } );
+  $( function() {
+    var availableTags = [
+      "Miriam Martinez",
+      "Miriam Castillo",
+      "Lorena",
+      "Paola",
+      "Nadia Gomari",
+      "Nadia",
+      "Dafne"
+    ];
+    function split( val ) {
+      return val.split( /,\s*/ );
+    }
+    function extractLast( term ) {
+      return split( term ).pop();
+    }                            
+    $( "#Asistente" )
+      // don't navigate away from the field on tab when selecting an item
+      .on( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).autocomplete( "instance" ).menu.active ) {
+          event.preventDefault();
+        }
+      })
+      .autocomplete({
+        minLength: 0,
+        source: function( request, response ) {
+          // delegate back to autocomplete, but extract the last term
+          response( $.ui.autocomplete.filter(
+            availableTags, extractLast( request.term ) ) );
+        },
+        focus: function() {
+          // prevent value inserted on focus
+          return false;
+        },
+        select: function( event, ui ) {
+          var terms = split( this.value );
+          // remove the current input
+          terms.pop();
+          // add the selected item
+          terms.push( ui.item.value );
+          // add placeholder to get the comma-and-space at the end
+          terms.push( "" );
+          this.value = terms.join( ", " );
+          return false;
+        }
+      });
+  } );
+  
+    $( function() {
+    $( "input" ).checkboxradio({
+      icon: false
+    });
+  } );
+
+  function ClearData() {
+   $("#PACIENTE").val(null);
+$("#FECHA").val(null);
+$("#EDAD").val(null);
+//$("input[name=SEXO]:checked").val(null);
+$("#COMENT_FINAL").val(null);
+$("#DIRECCION").val(null);
+$("#DERIVACION").val(null);
+$("#NoHC").val(null);
+$("#Operador").val(null);
+$("#Asistente").val(null);
+$("#ANTCLIN").val(null);
+$("#MOTIVO").val(null);
+$("#CIRPREV").val(null);
+$("#MESES").val(null);
+//$("input[name=PRECL]:checked").val(null);
+//$("input[name=POSTCL]:checked").val(null);
+//$("input[name=CGITIS]:checked").val(null);
+//$("input[name=PCTAG]:checked").val(null);
+//$("input[name=PCTCR]:checked").val(null);
+//$("input[name=LIVE]:checked").val(null);
+//$("input[name=KEHR]:checked").val(null);
+//$("input[name=S_IMPREG]:checked").val(null);
+$("#BR").val(null);
+$("#FAL").val(null);
+$("#AMIL").val(null);
+$("#TQUICK").val(null);
+$("#ECO").val(null);
+$("#TAC").val(null);
+$("#RNM").val(null);
+$("#HALLAZGO_ERCP").val(null);
+$("#ERCP_DIF").val(null);
+$("#METODO_ERCP").val(null);
+//$("input[name=DIVERT]:checked").val(null);
+//$("input[name=BALON_DILAT]:checked").val(null);
+//$("input[name=BALON_EXTRAC]:checked").val(null);
+$("#CANUL_WIR").val(null);
+//$("input[name=No_inyecc_Worsung]:checked").val(null);
+$("#IND_PROT").val(null);
+$("#TIPO_PROT").val(null);
+$("#NoPROT").val(null);
+//$("input[name=STENT_PANCREAS]:checked").val(null);
+//$("input[name=INDOMETACINA]:checked").val(null);
+$("#COMPLIC").val(null);
+//$("input[name=MORT]:checked").val(null);
+$("#MEMO").val(null);
+$("#Materiales_entregados").val(null);
+$("#Implante").val(null);
+
+$('input:radio').prop('checked', false);
+  };
+
+  function onSuccess(respuesta) {
+   alert('Cargado');
+   ClearData();
+  };
+  function onFailure(error) {
+ alert('Fail');
+ alert("ERROR: " + error.message);
+  };
+  $(document).ready(function() {
+  $(function() {
+    $("#FECHA").datepicker({
+      dateFormat: 'dd/mm/yy',
+      showButtonPanel: false,
+      changeMonth: false,
+      changeYear: false,
+      /*showOn: "button",
+      buttonImage: "images/calendar.gif",
+      buttonImageOnly: true,
+      minDate: '+1D',
+      maxDate: '+3M',*/
+      inline: true
+    });
+  });
+  $.datepicker.regional['es'] = {
+    closeText: 'Cerrar',
+    prevText: '<Ant',
+    nextText: 'Sig>',
+    currentText: 'Hoy',
+    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+    dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+    weekHeader: 'Sm',
+    dateFormat: 'dd/mm/yy',
+    firstDay: 1,
+    isRTL: false,
+    showMonthAfterYear: false,
+    yearSuffix: ''
+  };
+  $.datepicker.setDefaults($.datepicker.regional['es']);
+});
+  $( function() {
+    //$( "#FECHA" ).datepicker($.datepicker.regional[ "es" ]);
+  } );
+  $( function() {
+    var availableTags = [
+      "Masculino",
+      "Femenino",
+      "Indeterminado"
+    ];
+    $( "#SEXO" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  $( function() {
+    var availableTags = [
+      "Anchorena Recoleta",
+      "Anchorena San Martin",
+      "Itoiz",
+      "IQDC",
+      "Colegiales",
+      "CEMIC",
+      "Corporación",
+      "Militar",
+      "UOM",
+      "Dupuytren",
+      "Sirio",
+      "San Juan de Dios",
+      "San Carlos",
+      "Fatima",
+      "Pilar",
+      "Bessone",
+      "Tachella",
+      "Loiacono",
+      "OSPLAD"
+    ];
+    $( "#DIRECCION" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  $( function() {
+    var availableTags = [
+      "Nada",
+      "Boca",
+      "Esofago",
+      "Estomago",
+      "Bulbo",
+      "Duodeno",
+      "Canulacion Pancreas",
+      "Canulacion Coledoco",
+      "Opacificacion",
+      "Papilotomia",
+      "Precorte",
+      "Dilatacion",
+      "Litotripsia",
+      "Extracion Lito Parcial",
+      "Extracion Lito Total",
+      "Colocacion de Protesis",
+      "Colocacion de Autoexpansible",
+      "Control de Hemostasia",
+      "Aspiración",
+      "Salida"
+    ];
+    $( "#DestProp" ).autocomplete({
+      source: availableTags
+    });
+  } );
+$( function() {
+    var availableTags = [
+      "Nada",
+      "Boca",
+      "Esofago",
+      "Estomago",
+      "Bulbo",
+      "Duodeno",
+      "Canulacion Pancreas",
+      "Canulacion Coledoco",
+      "Opacificacion",
+      "Papilotomia",
+      "Precorte",
+      "Dilatacion",
+      "Litotripsia",
+      "Extracion Lito Parcial",
+      "Extracion Lito Total",
+      "Colocacion de Protesis",
+      "Colocacion de Autoexpansible",
+      "Control de Hemostasia",
+      "Aspiración",
+      "Salida"
+     ];
+    $( "#DestProc" ).autocomplete({
+      source: availableTags
+    });
+  } );
+
+function PickData(){
+   var Datos = [];
+   Datos.push($("#PACIENTE").val());
+   Datos.push($("#FECHA").val());
+   Datos.push($("#EDAD").val());
+   Datos.push($("input[name=SEXO]:checked").val());
+   Datos.push($("#COMENT_FINAL").val());
+   Datos.push($("#DIRECCION").val());
+   Datos.push($("#DERIVACION").val());
+   Datos.push($("#NoHC").val());
+   Datos.push($("#Operador").val());
+   Datos.push($("#Asistente").val());
+   Datos.push($("#ANTCLIN").val());
+   Datos.push($("#MOTIVO").val());
+   Datos.push($("#CIRPREV").val());
+   Datos.push($("#MESES").val());
+   Datos.push($("input[name=PRECL]:checked").val());
+   Datos.push($("input[name=POSTCL]:checked").val());
+   Datos.push($("input[name=CGITIS]:checked").val());
+   Datos.push($("input[name=PCTAG]:checked").val());
+   Datos.push($("input[name=PCTCR]:checked").val());
+   Datos.push($("input[name=LIVE]:checked").val());
+   Datos.push($("input[name=KEHR]:checked").val());
+   Datos.push($("input[name=S_IMPREG]:checked").val());
+   Datos.push($("#BR").val());
+   Datos.push($("#FAL").val());
+   Datos.push($("#AMIL").val());
+   Datos.push($("#TQUICK").val());
+   Datos.push($("#ECO").val());
+   Datos.push($("#TAC").val());
+   Datos.push($("#RNM").val());
+   Datos.push($("#HALLAZGO_ERCP").val());
+   Datos.push($("#ERCP_DIF").val());
+   Datos.push($("#METODO_ERCP").val());
+   Datos.push($("input[name=DIVERT]:checked").val());
+   Datos.push($("input[name=BALON_DILAT]:checked").val());
+   Datos.push($("input[name=BALON_EXTRAC]:checked").val());
+   Datos.push($("#CANUL_WIR").val());
+   Datos.push($("input[name=No_inyecc_Worsung]:checked").val());
+   Datos.push($("#IND_PROT").val());
+   Datos.push($("#TIPO_PROT").val());
+   Datos.push($("#NoPROT").val());
+   Datos.push($("input[name=STENT_PANCREAS]:checked").val());
+   Datos.push($("input[name=INDOMETACINA]:checked").val());
+   Datos.push($("#COMPLIC").val());
+   Datos.push($("input[name=MORT]:checked").val());
+   Datos.push($("#MEMO").val());
+   Datos.push($("#Materiales_entregados").val());
+   Datos.push($("#Implante").val());
+   return Datos;
+  };
+function AddData(){
+  var data = [];
+  data[0]=PickData();
+  //data[1]=PickData2();
+  google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).BaseCall(JSON.stringify(data));
+  };
+  </script>
+  
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+  <!--
+  <div>
+     <table>
+     <tbody>
+     <tr><td>Failed Load</td><td><input type="button" class="action" value="Recargar" onclick=""></td></tr>
+     </tbody>
+     </table>
+  </div>
+  -->
+  <div>     
+     <table>
+     <tbody>
+          <tr><td>Paciente:</td>                <td><input type="text" name="PACIENTE" id="PACIENTE" autocomplete="off"></td></tr>
+          <tr><td>Fecha:</td>                   <td><input type="text" name="FECHA" id="FECHA" autocomplete="off"></td></tr>
+          <tr><td>Edad:</td>                    <td><input type="text" name="EDAD" id="EDAD" autocomplete="false"></td></tr>
+          <tr><td>Sexo:</td>                    <td><div><input type="radio" name="SEXO" value="MASCULINO">MASCULINO<input type="radio" name="SEXO" value="FEMENINO">FEMENINO<input type="radio" name="SEXO" value="OTRO">OTRO</div></td></tr>
+          <tr><td>Comentario Final:</td>        <td><textarea rows="3" cols="30" id="COMENT_FINAL" ></textarea></td></tr>
+          <tr><td>Direccion:</td>               <td><input type="text" name="DIRECCION" id="DIRECCION"></td></tr>
+          <tr><td>Derivacion:</td>              <td><input type="text" name="DERIVACION" id="DERIVACION" autocomplete="off"></td></tr>
+          <tr><td>Numero de HC:</td>            <td><input type="text" name="NoHC" id="NoHC" autocomplete="off"></td></tr>
+          <tr><td>Operador:</td>                <td><input type="text" name="Operador" id="Operador" autocomplete="off"></td></tr>
+          <tr><td>Asistente:</td>               <td><input type="text" name="Asistente" id="Asistente" autocomplete="off"></td></tr>
+          <tr><td>Antecedentes Clinicos:</td>   <td><textarea rows="3" cols="30" id="ANTCLIN"></textarea></td></tr>
+          <tr><td>Motivo:</td>                  <td><input type="text" name="MOTIVO" id="MOTIVO" autocomplete="false"></td></tr>
+          <tr><td>Cirugias previas:</td>        <td><input type="text" name="CIRPREV" id="CIRPREV" autocomplete="false"></td></tr>
+          <tr><td>MESES:</td>                   <td><input type="number" min="0" name="MESES" id="MESES"></td></tr>
+          <tr><td>PRE Colecistectomia:</td>     <td><div><input type="radio" name="PRECL" value="SI">SI<input type="radio" name="PRECL" value="NO">NO</div></td></tr>
+          <tr><td>POST Colecistectomia:</td>    <td><div><input type="radio" name="POSTCL" value="SI">SI<input type="radio" name="POSTCL" value="NO">NO</div></td></tr>
+          <tr><td>Con Colangitis:</td>          <td><div><input type="radio" name="CGITIS" value="SI">SI<input type="radio" name="CGITIS" value="NO">NO</div></td></tr>
+          <tr><td>Pancreatitis Aguda:</td>      <td><div><input type="radio" name="PCTAG" value="SI">SI<input type="radio" name="PCTAG" value="NO">NO</div></td></tr>
+          <tr><td>Pancreatitis Cronica:</td>    <td><div><input type="radio" name="PCTCR" value="SI">SI<input type="radio" name="PCTCR" value="NO">NO</div></td></tr>
+          <tr><td>Litiasis Vescular:</td>       <td><div><input type="radio" name="LIVE" value="SI">SI<input type="radio" name="LIVE" value="NO">NO</div></td></tr>
+          <tr><td>KEHR:</td>                    <td><div><input type="radio" name="KEHR" value="SI">SI<input type="radio" name="KEHR" value="NO">NO</div></td></tr>
+          <tr><td>Sindrome de Impregancion:</td><td><div><input type="radio" name="S_IMPREG" value="SI">SI<input type="radio" name="S_IMPREG" value="NO">NO</div></td></tr>
+          <tr><td>BR:</td>                      <td><input type="number" min="0"  name="BR" id="BR"></td></tr>
+          <tr><td>FAL:</td>                     <td><input type="number" min="0"  name="FAL" id="FAL"></td></tr>
+          <tr><td>AMIL:</td>                    <td><input type="number" min="0"  name="AMIL" id="AMIL"></td></tr>
+          <tr><td>TQUICK:</td>                  <td><input type="number" min="0"  name="TQUICK" id="TQUICK"></td></tr>
+          <tr><td>ECO:</td>                     <td><textarea rows="3" cols="30" id="ECO"></textarea></td></tr>
+          <tr><td>TAC:</td>                     <td><textarea rows="3" cols="30" id="TAC"></textarea></td></tr>
+          <tr><td>RNM:</td>                     <td><textarea rows="3" cols="30" id="RNM"></textarea></td></tr>
+          <tr><td>HALLAZGO EN ERCP:</td>        <td><textarea rows="3" cols="30" id="HALLAZGO_ERCP" autocomplete="false"></textarea></td></tr>
+          <tr><td>ERCP Dificultosa:</td>        <td><input type="text" name="ERCP_DIF" id="ERCP_DIF"></td></tr>
+          <tr><td>METODO ERCP:</td>             <td><input type="text" name="METODO_ERCP" id="METODO_ERCP"></td></tr>
+          <tr><td>Diverticulo duodenal:</td>    <td><div><input type="radio" name="DIVERT" value="SI">SI<input type="radio" name="DIVERT" value="NO">NO</div></td></tr>
+          <tr><td>BALON Dilatador:</td>         <td><div><input type="radio" name="BALON_DILAT" value="SI">SI<input type="radio" name="BALON_DILAT" value="NO">NO</div></td></tr>
+          <tr><td>BALON Extractor:</td>         <td><div><input type="radio" name="BALON_EXTRAC" value="SI">SI<input type="radio" name="BALON_EXTRAC" value="NO">NO</div></td></tr>
+          <tr><td>Canulacion de Wirsung:</td>   <td><input type="number" min="0"  name="CANUL_WIR" id="CANUL_WIR"></td></tr>
+          <tr><td>Inyeccion de Wirsung:</td>    <td><div><input type="radio" name="No_inyecc_Worsung" value="SI">SI<input type="radio" name="No_inyecc_Worsung" value="NO">NO</div></td></tr>
+          <tr><td>Indicacion de Protesis:</td>  <td><input type="text" name="IND_PROT" id="IND_PROT"></td></tr>
+          <tr><td>Tipo de Protesis:</td>        <td><input type="text" name="TIPO_PROT" id="TIPO_PROT"></td></tr>
+          <tr><td>Numero de Protesis:</td>      <td><input type="number" min="0"  name="NoPROT" id="NoPROT"></td></tr>
+          <tr><td>Stent en Pancreas:</td>       <td><div><input type="radio" name="STENT_PANCREAS" value="SI">SI<input type="radio" name="STENT_PANCREAS" value="NO">NO</div></td></tr>
+          <tr><td>Indomentacina:</td>           <td><div><input type="radio" name="INDOMETACINA" value="SI">SI<input type="radio" name="INDOMETACINA" value="NO">NO</div></td></tr>
+          <tr><td>Complicaciones:</td>          <td><textarea rows="3" cols="30" id="COMPLIC"></textarea></td></tr>
+          <tr><td>Mortalidad:</td>              <td><div><input type="radio" name="MORT" value="SI">SI<input type="radio" name="MORT" value="NO">NO</div></td></tr>
+          <tr><td>MEMO:</td>                    <td><textarea rows="3" cols="30" id="MEMO"></textarea></td></tr>
+          <tr><td>Materiales entregados:</td>   <td><input type="text" name="Materiales_entregados" id="Materiales_entregados"></td></tr>
+          <tr><td>Implante:</td>                <td><input type="text" name="Implante" id="Implante"></td></tr>
+     </tbody>
+     </table>
+  </div>
+<input type="button" class="action" value="Cargar Datos" onclick="AddData();">
+  </body>
+</html>
